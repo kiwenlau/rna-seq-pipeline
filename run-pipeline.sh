@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # run RNA-Seq pipeline by using kiwenlau/tophat-cufflinks:latest image
-current_path=`pwd`
-#current_path=${current_path%$'\n'} 
-#echo $current_path 
+# http://www.nextflow.io/example4.html
 
+current_path=`pwd`
+
+rm -rf output > /dev/null
 mkdir output
 
 echo -e "\nStep 1. Builds the genome index required by the mapping process\n"
