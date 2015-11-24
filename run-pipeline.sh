@@ -1,14 +1,17 @@
 #!/bin/bash
 
 # run RNA-Seq pipeline by using kiwenlau/tophat-cufflinks:latest image
-crrent_path=`pwd`
+current_path=`pwd`
+#current_path=${current_path%$'\n'} 
+#echo $current_path 
 
 mkdir output
 
-echo "Step 1. Builds the genome index required by the mapping process"
+#echo "Step 1. Builds the genome index required by the mapping process"
 mkdir output/index
 #docker run -v $current_path/data:/tmp/data -v $current_path/output:/tmp/output -w /tmp kiwenlau/tophat-cufflinks ls data
 docker run -v $current_path/data:/tmp/data -v $current_path/output:/tmp/output -w /tmp kiwenlau/tophat-cufflinks bowtie2-build data/ggal_1_48850000_49020000.Ggal71.500bpflank.fa output/index/genome_index
+#docker run -v /root/mac/rna-seq-pipeline/data:/tmp/data -v /root/mac/rna-seq-pipeline/output:/tmp/output -w /tmp kiwenlau/tophat-cufflinks bowtie2-build data/ggal_1_48850000_49020000.Ggal71.500bpflank.fa output/index/genome_index
 
 #echo "Step 2. Maps each read-pair by using Tophat2 mapper tool"
 #tophat2 -o output/tophat_out_gut output/index/genome_index data/ggal_gut_1.fq data/ggal_gut_2.fq
